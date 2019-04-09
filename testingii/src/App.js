@@ -11,12 +11,11 @@ class App extends Component {
   }
 
   onStrike = (e) => {
-    e.preventDefault();
     let { outs, strikes, balls } = this.state
     if(outs > 3 || outs < 0 || balls > 4 || balls < 0
       || strikes > 3 || strikes < 0){
         console.log('Display has an error')
-    }else if(outs === 3){
+    }else if(outs === 2 && strikes === 2){
       this.setState({
         balls:0,
         strikes: 0,
@@ -27,7 +26,7 @@ class App extends Component {
       this.setState({
       strikes: strikes+1
     })
-    }else if(strikes === 2 && outs < 2){
+    }else if(strikes === 2 && outs < 3){
       this.setState({
         balls:0,
         strikes: 0,

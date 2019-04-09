@@ -2,7 +2,7 @@ import React from 'react'
 
 const Dashboard = (props) => {
   return (
-    <div>
+    <div className='dashboard'>
       <button onClick={props.onStrike}>Strike</button>
       <button onClick={props.onBall}>Ball</button>
       <button onClick={props.onFoul}>Foul</button>
