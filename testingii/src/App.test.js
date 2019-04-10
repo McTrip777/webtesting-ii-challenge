@@ -11,30 +11,48 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('renders successfully', () => {
-  render(<App />);
-});
+const { getByText } = render(<App />);
 
 it('adds a strike', () => {
-  const { getByText } = render(<App />);
 
-  const button = getByText('Strike');
+  const strike = getByText('Strike');
 
-  fireEvent.click(button);
-  fireEvent.click(button);
+  // fireEvent.click(strike);
+  fireEvent.click(strike);
   
   // getByText(/Strikes: 1/i);
-  getByText(/Strikes: 2/i);
+  getByText(`Strikes: ${1}`);
 });
 
 it('adds a ball', () => {
-  const { getByText } = render(<App />);
+  const ball = getByText('Ball');
 
-  const button = getByText('Ball');
-
-  fireEvent.click(button);
-  // fireEvent.click(button);
-  // fireEvent.click(button);
+  fireEvent.click(ball);
+  fireEvent.click(ball);
+  fireEvent.click(ball);
   
-  getByText('Balls: 2');
+  getByText(`Balls: ${3}`);
+});
+
+it('adds a foul/strike', () => {
+  const foul = getByText('Foul');
+
+  // This reads two fouls because 
+  // Strikes are clicked in the above function.
+  fireEvent.click(foul);
+
+  getByText(`Strikes: ${2}`);
+});
+
+it('adds a hit', () => {
+  const hit = getByText('Hit');
+
+  fireEvent.click(hit);
+  fireEvent.click(hit);
+  
+  getByText(
+    `Outs: ${0}`,
+    `Balls: ${0}`,
+    `Strikes: ${0}`
+  );
 });
